@@ -16,6 +16,8 @@ import java.io.FileReader;
 
 public class Bot {
 
+    //Test
+
     public static final Config config = getConfig();
     public static MongoCollection<Document> mongoCollection = connectMongoDBDatabase();
 
