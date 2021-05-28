@@ -16,18 +16,16 @@ import java.io.FileReader;
 
 public class Bot {
 
-    //Test
-
-    public static final Config config = getConfig();
-    public static MongoCollection<Document> mongoCollection = connectMongoDBDatabase();
+    public static final Config CONFIG = getConfig();
+    public static final MongoCollection<Document> MONGO_COLLECTION = connectMongoDBDatabase();
 
     public static void main(String[] args) {
 
         //Load HashMap
-        loadDatabaseMap(mongoCollection);
+        loadDatabaseMap(MONGO_COLLECTION);
 
         //Connect to discord websocket
-        JDABuilder builder = JDABuilder.createDefault(config.getToken())
+        JDABuilder builder = JDABuilder.createDefault(CONFIG.getToken())
             .setActivity(Activity.playing("Minecraft"))
             .addEventListeners(new GuildMessageReceived());
         try {

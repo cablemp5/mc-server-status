@@ -40,7 +40,7 @@ public class GuildMessageReceived extends ListenerAdapter {
                 serverIp = databaseMap.get(guildId);
             }
 
-            if (message.charAt(0) == Bot.config.getCommandPrefix()) {
+            if (message.charAt(0) == Bot.CONFIG.getCommandPrefix()) {
                 
                 String command = message.split(" ")[0].substring(1);
                 String[] args = Arrays.copyOfRange(message.split(" "),1,message.split(" ").length);
@@ -52,20 +52,20 @@ public class GuildMessageReceived extends ListenerAdapter {
                             serverIp = args[0];
                             if (databaseMap.containsKey(guildId)) {
                                 databaseMap.replace(guildId, serverIp);
-                                Document query = Bot.mongoCollection.find(new Document("guild_id",guildId)).first();
+                                Document query = Bot.MONGO_COLLECTION.find(new Document("guild_id",guildId)).first();
                                 if (query != null) {
                                     Bson update = new Document("ip",serverIp);
                                     Bson updateOperation = new Document("$set",update);
-                                    Bot.mongoCollection.updateOne(query,updateOperation);
+                                    Bot.MONGO_COLLECTION.updateOne(query,updateOperation);
                                 } else {
-                                    User user = User.fromId(Bot.config.getOwnerID());
+                                    User user = User.fromId(Bot.CONFIG.getOwnerID());
                                     PrivateChannel privateChat = user.openPrivateChannel().complete();
                                     privateChat.sendMessage("There was an error syncing the database and hashmap. Consider restarting the bot.").queue();
                                 }
                             } else {
                                 databaseMap.put(guildId, serverIp);
                                 Document document = new Document("guild_id", guildId).append("ip",serverIp);
-                                Bot.mongoCollection.insertOne(document);
+                                Bot.MONGO_COLLECTION.insertOne(document);
                             }
                             embed.setTitle("Server IP was set to:  `" + serverIp + "`");
                         } else if (args.length == 0) {
@@ -90,7 +90,7 @@ public class GuildMessageReceived extends ListenerAdapter {
                         }
                     }
                     case "shutdown" -> {
-                        if (event.getAuthor().getId().equals(Bot.config.getOwnerID())) {
+                        if (event.getAuthor().getId().equals(Bot.CONFIG.getOwnerID())) {
                             EmbedBuilder embed = new EmbedBuilder()
                                     .setColor(Color.ORANGE)
                                     .setTitle("Shutting down SimpleServerStats...");
