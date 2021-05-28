@@ -1,4 +1,4 @@
-package me.calebcollins.events;
+package me.cablemp5.events;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,8 +6,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import me.calebcollins.Bot;
-import me.calebcollins.jsonobjects.StatusResponse;
+import me.cablemp5.Bot;
+import me.cablemp5.jsonobjects.StatusResponse;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;

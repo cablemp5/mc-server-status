@@ -1,10 +1,10 @@
-package me.calebcollins;
+package me.cablemp5;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mongodb.client.*;
-import me.calebcollins.events.GuildMessageReceived;
-import me.calebcollins.jsonobjects.Config;
+import me.cablemp5.events.GuildMessageReceived;
+import me.cablemp5.jsonobjects.Config;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import org.bson.Document;
@@ -16,8 +16,8 @@ import java.io.FileReader;
 
 public class Bot {
 
-    public static final Config CONFIG = getConfig();
-    public static final MongoCollection<Document> MONGO_COLLECTION = connectMongoDBDatabase();
+    public static Config CONFIG = getConfig();
+    public static MongoCollection<Document> MONGO_COLLECTION = connectMongoDBDatabase();
 
     public static void main(String[] args) {
 

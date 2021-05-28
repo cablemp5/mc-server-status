@@ -1,4 +1,4 @@
-package me.calebcollins.jsonobjects;
+package me.cablemp5.jsonobjects;
 
 import java.util.HashMap;
 
