@@ -1,3 +1,6 @@
+![image](https://i.imgur.com/lOmsD99.png)
+
+
 # 3S - SimpleServerStatus
 Find out if a Minecraft server is online from Discord!
 
