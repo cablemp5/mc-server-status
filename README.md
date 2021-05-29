@@ -1,4 +1,4 @@
-![image](https://i.imgur.com/lOmsD99.png)
+![image](https://i.imgur.com/qQ9Uacq.png)
 
 
 # 3S - SimpleServerStatus
