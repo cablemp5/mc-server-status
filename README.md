@@ -3,11 +3,6 @@
 <br />
 
 <p align="center">
-    <img src="https://forthebadge.com/images/badges/made-with-java.svg"> <img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg">
-
-<p/>
-
-<p align="center">
   <a href="https://github.com/cablemp5/mcserverstatus">
     <img src="https://img.shields.io/github/languages/code-size/cablemp5/mcserverstatus" alt="Github Repo">
   </a>
@@ -45,11 +40,12 @@
   <a href="#license">License</a>
 </p>
     
+
+<p align=center> This bot is still under heavy development! There may be bugs that cause the bot to not function!</p>
+    
 # Overview
 
-#### ***This bot is still under heavy development! There may be bugs that cause the bot to not function!***
-
-mcServerStatus is a lightweight Discord bot written in Java that allows you to view the status and info of a Minecraft server directly in Discord. The bot is hosted on the cloud so [installation](#how-to-install) is as easy as adding the bot to your server. No prior coding experience is needed!
+mcServerStatus is a lightweight Discord bot written in Java that allows you to view the status and info of a Minecraft server directly in Discord. The bot's focus is to provided detailed information about a server as straightforward and efficient as possible. The bot is hosted on the cloud so [installation](#how-to-install) is as easy as adding the bot to your server. No prior coding experience is needed!
 
 **This bot allows you to see:**
 - \# of Players Online
@@ -70,14 +66,14 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 
 # Usage
 
-```java
-// Set the ip address
+```bash
+# Set the ip address
 !setip <ip>
 
-// Gets the server's status
+# Gets the server's status
 !status
 
-// Gets the server's info
+# Gets the server's info
 !info
 ```
 
