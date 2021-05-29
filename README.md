@@ -1,8 +1,20 @@
 ![image](https://i.imgur.com/qQ9Uacq.png)
 
+<h1 align="center">mcserverstatus Discord Bot</h4>
 
-# 3S - SimpleServerStatus
-Find out if a Minecraft server is online from Discord!
+<p align="center">
+  <a href="#about">About</a>
+  •
+  <a href="#installation">Installation</a>
+  •
+  <a href="#technolgies">Technologies</a>
+  •
+  <a href="#plugins">References</a>
+  •
+  <a href="#bugs-and-support">Bugs and Support</a>
+  •
+  <a href="#license">License</a>
+</p>
 
 ## IMPORTANT NOTICE
 
@@ -22,9 +34,17 @@ This Discord bot is still under heavy development! There may be bugs that will c
 
 This discord bot is still under
 
-## Techologies
+## Technologies
+
+- MongoDB
+- JDA
+- Unirest
+- Gson
+
 
 ## References
+
+This is a test reference
 
 ## Bugs and Support
 
