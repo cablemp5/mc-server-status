@@ -1,13 +1,15 @@
-# ![image](https://i.imgur.com/5PuSf5J.png)
+# ![image](https://i.imgur.com/kVSaWS1.png)
 
 <br />
 
 <p align="center">
+    <img src="https://forthebadge.com/images/badges/made-with-java.svg"> <img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg">
+
+<p/>
+
+<p align="center">
   <a href="https://github.com/cablemp5/mcserverstatus">
     <img src="https://img.shields.io/github/languages/code-size/cablemp5/mcserverstatus" alt="Github Repo">
-  </a>
-  <a href="https://github.com/cablemp5/mcserverstatus">
-    <img src="https://img.shields.io/github/languages/count/cablemp5/mcserverstatus" alt="Languages">
   </a>
   <a href="https://github.com/cablemp5/mcserverstatus">
     <img src="https://img.shields.io/badge/java-jdk16-red" alt="Java">
@@ -29,7 +31,6 @@
   </a>
 <p/>
 
-
 <p align="center">
   <a href="#overview">Overview</a>
   •
@@ -46,7 +47,7 @@
     
 # Overview
 
-> ***This bot is still under heavy development! There may be bugs that cause te bot to not function.***
+#### ***This bot is still under heavy development! There may be bugs that cause the bot to not function!***
 
 mcServerStatus is a lightweight Discord bot written in Java that allows you to view the status and info of a Minecraft server directly in Discord. The bot is hosted on the cloud so [installation](#how-to-install) is as easy as adding the bot to your server. No prior coding experience is needed!
 
@@ -65,7 +66,7 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 1. Choose the server you want to add the bot to
 2. Grant the bot the permissions it requests
 3. Complete the Captcha
-4. **BOOM!** The bot should now be in your server and ready to use!
+4. Boom! The bot should now be in your server and ready to use!
 
 # Usage
 
@@ -92,8 +93,8 @@ This software uses the following API's and libraries:
 
 # Bugs and Support
 
-If you encounter any bugs, or want to request a new feature, leaving an issue on the GitHub page or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
+If you encounter any bugs, or want to request a new feature, leaving an issue or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
 
 # License
 
-mcServerStatus is an open source project released under the [MIT License](LICENSE), and contributions are more than welcome.
+mcServerStatus is an open source project released under the [MIT License](LICENSE), and contributions are more than welcome. It's also an Emailware, so feel free to email me at [cmikec12@gmail.com](cmikec12@gmail.com)
