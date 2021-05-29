@@ -93,7 +93,7 @@ This software uses the following API's and libraries:
 
 # Bugs and Support
 
-If you encounter any bugs, or want to request a new feature, leaving an issue or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
+If you encounter any bugs, or want to request a new feature, leaving an issue or messaging me on Discord is the fastest way to reach me. My discord user is `cablemp5#0027`
 
 # License
 
