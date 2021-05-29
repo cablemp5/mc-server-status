@@ -1,4 +1,6 @@
-![image](https://i.imgur.com/5PuSf5J.png)
+# ![image](https://i.imgur.com/5PuSf5J.png)
+
+<br />
 
 <p align="center">
   <a href="https://github.com/cablemp5/mcserverstatus">
@@ -26,55 +28,86 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="Pull Requests">
   </a>
 <p/>
+
+
+<p align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#how-to-install">How to Install</a>
+  •
+  <a href="#technologies">Technologies</a>
+  •
+  <a href="#usage">Usage</a>
+  •
+  <a href="#bugs-and-support">Bugs and Support</a>
+  •
+  <a href="#license">License</a>
+</p>
     
+# Overview
 
-## IMPORTANT NOTICE
+> ***This bot is still under heavy development! There may be bugs that cause te bot to not function.***
 
-This Discord bot is still under heavy development! There may be bugs that will cause the bot to not function as intended!
+mcServerStatus is a lightweight Discord bot written in Java that allows you to view the status and info of a Minecraft server directly in Discord. The bot is hosted on the cloud so [installation](#how-to-install) is as easy as adding the bot to your server. No prior coding experience is needed!
 
-### Table of Contents
-- [About](#about)
-- [Installation](#installation)
-- [Technologies](#technologies)
-- [References](#references)
-- [Bugs and Support](#bugs-and-support)
-- [License](#license)
+**This bot allows you to see:**
+- \# of Players Online
+- List of Players Online
+- Host IP Address
+- MOTD
+- Version
+- Port
 
-## About
+# How to Install
 
-## Installation
+**To install the Discord Bot just click [here](https://discord.com/api/oauth2/authorize?client_id=843847976569012225&permissions=124928&scope=bot) and follow the instructions below:**
 
-This discord bot is still under
+1. Choose the server you want to add the bot to
+2. Grant the bot the permissions it requests
+3. Complete the Captcha
+4. **BOOM!** The bot should now be in your server and ready to use!
 
-## Technologies
+# Usage
 
-- MongoDB
-- JDA
-- Unirest
-- Gson
-
-
-## References
-
-This is a test reference
-
-## Usage
-
-```java
-//Set the ip address
+```
+# Set the ip address
 !setip <ip>
 
-//Gets the server's status
+# Gets the server's status
 !status
 
-//Gets the server's info
+# Gets the server's info
 !info
 ```
 
-## Bugs and Support
+
+# Technologies
+
+This software uses the following API's and libraries:
+
+- [**MongoDB**](https://www.mongodb.com/)
+- [**JDA**](https://github.com/DV8FromTheWorld/JDA)
+- [**Unirest**](https://kong.github.io/unirest-java/#requests)
+- [**Gson**](https://github.com/google/gson)
+
+
+# Usage
+
+```java
+// Set the ip address
+!setip {ip}
+
+// Gets the server's status
+!status
+
+// Gets the server's info
+!info
+```
+
+# Bugs and Support
 
 If you encounter any bugs, or want to request a new feature, leaving an issue on the GitHub page or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
 
-## License
+# License
 
 The TripleS Bot is an open source project released under the [MIT License](LICENSE), and I welcome code contributions on GitHub.
