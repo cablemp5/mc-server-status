@@ -1,20 +1,5 @@
-![image](https://i.imgur.com/qQ9Uacq.png)
+![image](https://i.imgur.com/5PuSf5J.png)
 
-<h1 align="center">mcserverstatus Discord Bot</h4>
-
-<p align="center">
-  <a href="#about">About</a>
-  •
-  <a href="#installation">Installation</a>
-  •
-  <a href="#technolgies">Technologies</a>
-  •
-  <a href="#plugins">References</a>
-  •
-  <a href="#bugs-and-support">Bugs and Support</a>
-  •
-  <a href="#license">License</a>
-</p>
 
 ## IMPORTANT NOTICE
 
