@@ -69,14 +69,14 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 
 # Usage
 
-```
-# Set the ip address
+```java
+// Set the ip address
 !setip <ip>
 
-# Gets the server's status
+// Gets the server's status
 !status
 
-# Gets the server's info
+// Gets the server's info
 !info
 ```
 
@@ -90,24 +90,10 @@ This software uses the following API's and libraries:
 - [**Unirest**](https://kong.github.io/unirest-java/#requests)
 - [**Gson**](https://github.com/google/gson)
 
-
-# Usage
-
-```java
-// Set the ip address
-!setip {ip}
-
-// Gets the server's status
-!status
-
-// Gets the server's info
-!info
-```
-
 # Bugs and Support
 
 If you encounter any bugs, or want to request a new feature, leaving an issue on the GitHub page or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
 
 # License
 
-The TripleS Bot is an open source project released under the [MIT License](LICENSE), and I welcome code contributions on GitHub.
+mcServerStatus is an open source project released under the [MIT License](LICENSE), and contributions are more than welcome.
