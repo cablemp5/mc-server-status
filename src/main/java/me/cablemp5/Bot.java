@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.mongodb.client.*;
 import me.cablemp5.events.GuildMessageReceived;
 import me.cablemp5.jsonobjects.Config;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import org.bson.Document;
@@ -25,11 +26,12 @@ public class Bot {
         loadDatabaseMap(MONGO_COLLECTION);
 
         //Connect to discord websocket
-        JDABuilder builder = JDABuilder.createDefault(CONFIG.getToken())
-            .setActivity(Activity.playing("Minecraft"))
-            .addEventListeners(new GuildMessageReceived());
         try {
-            builder.build().awaitReady();
+            JDA jda = JDABuilder.createDefault(CONFIG.getToken())
+                    .setActivity(Activity.playing("Minecraft | !status"))
+                    .addEventListeners(new GuildMessageReceived())
+                    .build();
+            jda.awaitReady();
             System.out.println("[JDA] Discord Bot Connected!");
         } catch (Exception e) {
             System.out.println("Failed to connect Discord Bot!");

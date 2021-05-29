@@ -47,7 +47,7 @@ public class GuildMessageReceived extends ListenerAdapter {
                 
                 switch (command) {
                     case "setip" -> {
-                        EmbedBuilder embed = new EmbedBuilder().setColor(Color.ORANGE);
+                        EmbedBuilder embed = new EmbedBuilder().setColor(Color.CYAN);
                         if (args.length == 1) {
                             serverIp = args[0];
                             if (databaseMap.containsKey(guildId)) {
@@ -92,7 +92,7 @@ public class GuildMessageReceived extends ListenerAdapter {
                     case "shutdown" -> {
                         if (event.getAuthor().getId().equals(Bot.CONFIG.getOwnerID())) {
                             EmbedBuilder embed = new EmbedBuilder()
-                                    .setColor(Color.ORANGE)
+                                    .setColor(Color.CYAN)
                                     .setTitle("Shutting down SimpleServerStats...");
                             chat.sendMessage(embed.build()).queue();
                             System.out.println("[JDA] Remotely shut down from Discord!");
@@ -119,7 +119,7 @@ public class GuildMessageReceived extends ListenerAdapter {
             try {
                 StatusResponse response = getResponse(ip);
                 EmbedBuilder embed = new EmbedBuilder()
-                        .setColor(Color.ORANGE)
+                        .setColor(Color.CYAN)
                         .setAuthor(ip, "https://api.mcsrvstat.us/icon/" + ip, "https://api.mcsrvstat.us/icon/" + ip);
                 if (response.getOnline().equals("true")) {
                     embed.addField("\ud83d\udd79  # of Players Online:", "```" + response.getPlayers().getOnline() + "```", true);
@@ -138,14 +138,14 @@ public class GuildMessageReceived extends ListenerAdapter {
                 chat.sendMessage(embed.build()).queue();
             } catch (Exception e) {
                 EmbedBuilder errorembed = new EmbedBuilder()
-                    .setColor(Color.ORANGE)
+                    .setColor(Color.CYAN)
                     .setTitle("There was an error getting the server info");
                 chat.sendMessage(errorembed.build()).queue();
             }
         } else {
             EmbedBuilder embed = new EmbedBuilder()
                 .setTitle("You haven't set the server IP address. Use  `!setip [ip]`  to set it.")
-                .setColor(Color.ORANGE);
+                .setColor(Color.CYAN);
             chat.sendMessage(embed.build()).queue();
         }
     }
@@ -156,7 +156,7 @@ public class GuildMessageReceived extends ListenerAdapter {
             StatusResponse response = this.getResponse(ip);
             boolean online = response.getOnline().equals("true");
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setColor(Color.ORANGE);
+            embed.setColor(Color.CYAN);
             embed.setAuthor(ip, "https://api.mcsrvstat.us/icon/" + ip, "https://api.mcsrvstat.us/icon/" + ip);
             if (!online) {
                 embed.setDescription("This server is offline. Are you sure the ip adress is: " + ip);
@@ -173,7 +173,7 @@ public class GuildMessageReceived extends ListenerAdapter {
             chat.sendMessage(embed.build()).queue();
         } catch (Exception e) {
             EmbedBuilder embed = new EmbedBuilder()
-                .setColor(Color.ORANGE)
+                .setColor(Color.CYAN)
                 .setTitle("There was an error getting the server info");
             chat.sendMessage(embed.build()).queue();
         }
