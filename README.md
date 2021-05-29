@@ -1,5 +1,32 @@
 ![image](https://i.imgur.com/5PuSf5J.png)
 
+<p align="center">
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/github/languages/code-size/cablemp5/mcserverstatus" alt="Github Repo">
+  </a>
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/github/languages/count/cablemp5/mcserverstatus" alt="Languages">
+  </a>
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/badge/java-jdk16-red" alt="Java">
+  </a>
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/badge/status-down-orange" alt="Bot Status">
+  </a>
+<p/>
+  
+<p align="center">
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/github/license/cablemp5/mcserverstatus" alt="License">
+  </a>
+  <a href="https://github.com/cablemp5/mcserverstatus">
+    <img src="https://img.shields.io/github/issues/cablemp5/mcserverstatus" alt="Issues">
+  </a>
+  <a href="https://github.com/cablemp5/mcserverstatus/pulls">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="Pull Requests">
+  </a>
+<p/>
+    
 
 ## IMPORTANT NOTICE
 
@@ -30,6 +57,19 @@ This discord bot is still under
 ## References
 
 This is a test reference
+
+## Usage
+
+```java
+//Set the ip address
+!setip <ip>
+
+//Gets the server's status
+!status
+
+//Gets the server's info
+!info
+```
 
 ## Bugs and Support
 
