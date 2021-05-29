@@ -66,7 +66,7 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 1. Choose the server you want to add the bot to
 2. Grant the bot the permissions it requests
 3. Complete the Captcha
-4. Boom! The bot should now be in your server and ready to use!
+4. Boom! The bot should now be in your server and ready to use! (The bot is currently not up)
 
 # Usage
 
