@@ -1,6 +1,5 @@
-# ![image](https://i.imgur.com/kVSaWS1.png)
+ ![transparentBanner](https://user-images.githubusercontent.com/67910697/120063392-fa978b00-c034-11eb-9034-ede1ec92bf29.png)
 
-<br />
 
 <p align="center">
   <a href="https://github.com/cablemp5/mcserverstatus">
@@ -39,9 +38,14 @@
   •
   <a href="#license">License</a>
 </p>
-    
 
+
+ 
 <p align=center> This bot is still under heavy development! There may be bugs that cause the bot to not function!</p>
+
+
+![demonstrationGif](https://user-images.githubusercontent.com/67910697/120063442-3894af00-c035-11eb-88c6-bdfb95449442.gif)
+
     
 # Overview
 
