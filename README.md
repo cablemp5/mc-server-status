@@ -66,18 +66,18 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 1. Choose the server you want to add the bot to
 2. Grant the bot the permissions it requests
 3. Complete the Captcha
-4. Boom! The bot should now be in your server and ready to use!
+4. Boom! The bot should now be in your server and ready to use! (The bot is currently not up)
 
 # Usage
 
-```bash
-# Set the ip address
+```js
+//Set the ip address
 !setip <ip>
 
-# Gets the server's status
+// Gets the server's status
 !status
 
-# Gets the server's info
+// Gets the server's info
 !info
 ```
 
@@ -93,7 +93,7 @@ This software uses the following API's and libraries:
 
 # Bugs and Support
 
-If you encounter any bugs, or want to request a new feature, leaving an issue or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
+If you encounter any bugs, or want to request a new feature, leaving an issue or messaging me on Discord is the fastest way to reach me. My discord user is `cablemp5#0027`
 
 # License
 
