@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Objects;
 
 
 public class Main {
@@ -41,7 +42,7 @@ public class Main {
     private static Config getConfig() {
 
         try {
-            File file = new File(Main.class.getClassLoader().getResource("config.json").getFile());
+            File file = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("config.json")).getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             System.out.println("[Config] Extracted config.json!");
