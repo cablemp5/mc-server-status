@@ -1,12 +1,13 @@
-package me.cablemp5.jsonobjects;
+package me.cablemp5.mappingobjects;
 
 public class Config {
 
     private String token;
-    private Character command_prefix;
+    private String mongo_uri;
+    private String command_prefix;
     private String owner_id;
 
-    public Character getCommandPrefix() {
+    public String getCommandPrefix() {
         return command_prefix;
     }
 
@@ -15,4 +16,7 @@ public class Config {
     public String getToken() {
         return token;
     }
+
+    public String getMongoUri() { return mongo_uri; }
+
 }

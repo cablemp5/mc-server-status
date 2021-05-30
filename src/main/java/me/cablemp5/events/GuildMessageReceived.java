@@ -6,8 +6,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import me.cablemp5.Bot;
-import me.cablemp5.jsonobjects.StatusResponse;
+import me.cablemp5.Main;
+import me.cablemp5.mappingobjects.Response;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -25,157 +25,142 @@ import java.util.HashMap;
 
 public class GuildMessageReceived extends ListenerAdapter {
 
-    public static HashMap<String, String> databaseMap = new HashMap<>();
+    private final Color DEFAULT_COLOR = new Color(0,180,181);
 
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+    public static HashMap<String, String> ipMap = new HashMap<>();
 
-        if (!event.getAuthor().isBot()) {
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e) {
+
+        if (!e.getAuthor().isBot()) {
             
-            String guildId = event.getGuild().getId();
-            TextChannel chat = event.getChannel();
-            String message = event.getMessage().getContentRaw();
+            String guildId = e.getGuild().getId();
+            TextChannel chat = e.getChannel();
+            String message = e.getMessage().getContentRaw();
 
-            String serverIp = "";
-            if (databaseMap.containsKey(guildId)) {
-                serverIp = databaseMap.get(guildId);
-            }
+            String ip = ipMap.getOrDefault(guildId, "");
 
-            if (message.charAt(0) == Bot.CONFIG.getCommandPrefix()) {
+            if (message.startsWith(Main.CONFIG.getCommandPrefix())) {
                 
-                String command = message.split(" ")[0].substring(1);
+                String command = message.split(" ")[0].substring(Main.CONFIG.getCommandPrefix().length()).toLowerCase();
                 String[] args = Arrays.copyOfRange(message.split(" "),1,message.split(" ").length);
-                
+
                 switch (command) {
                     case "setip" -> {
-                        EmbedBuilder embed = new EmbedBuilder().setColor(new Color(0,180,181));
+                        EmbedBuilder embed = new EmbedBuilder().setColor(DEFAULT_COLOR);
                         if (args.length == 1) {
-                            serverIp = args[0];
-                            if (databaseMap.containsKey(guildId)) {
-                                databaseMap.replace(guildId, serverIp);
-                                Document query = Bot.MONGO_COLLECTION.find(new Document("guild_id",guildId)).first();
+                            ip = args[0];
+                            if (ipMap.replace(guildId, ip) != null) {
+                                Document query = Main.MONGO_CONNECTION.getMongoCollection().find(new Document("guild_id",guildId)).first();
                                 if (query != null) {
-                                    Bson update = new Document("ip",serverIp);
+                                    Bson update = new Document("ip",ip);
                                     Bson updateOperation = new Document("$set",update);
-                                    Bot.MONGO_COLLECTION.updateOne(query,updateOperation);
+                                    Main.MONGO_CONNECTION.getMongoCollection().updateOne(query,updateOperation);
                                 } else {
-                                    User user = User.fromId(Bot.CONFIG.getOwnerID());
-                                    PrivateChannel privateChat = user.openPrivateChannel().complete();
-                                    privateChat.sendMessage("There was an error syncing the database and hashmap. Consider restarting the bot.").queue();
+                                    PrivateChannel privateChannel = User.fromId(Main.CONFIG.getOwnerID()).openPrivateChannel().complete();
+                                    privateChannel.sendMessage("[MongoDB] There was an error syncing the database and hashmap! Consider restarting the bot!").queue();
                                 }
                             } else {
-                                databaseMap.put(guildId, serverIp);
-                                Document document = new Document("guild_id", guildId).append("ip",serverIp);
-                                Bot.MONGO_COLLECTION.insertOne(document);
+                                ipMap.put(guildId, ip);
+                                Main.MONGO_CONNECTION.getMongoCollection().insertOne(new Document("guild_id", guildId).append("ip",ip));
                             }
-                            embed.setTitle("Server IP was set to:  `" + serverIp + "`");
+                            embed.setTitle("Server IP was set to:  `" + ip + "`");
                         } else if (args.length == 0) {
-                            embed.setTitle("Please include the server's IP address");
+                            embed.setTitle("Please include the server's IP address!");
                         } else {
-                            embed.setTitle("Too many arguments. To use this command type 'setip [serverIp address]'");
+                            embed.setTitle("Too many arguments! To use this command type 'setip [ip address]'");
                         }
                         chat.sendMessage(embed.build()).queue();
                     }
-                    case "info" -> {
-                        if (args.length == 0) {
-                            getInfo(serverIp, chat);
-                        } else if (args.length == 1) {
-                            getInfo(args[0], chat);
-                        }
+                    case "serverinfo" -> chat.sendMessage(args.length == 0 ? getInfo(ip).build() : getInfo(args[0]).build()).queue();
+                    case "status" -> chat.sendMessage(args.length == 0 ? getStatus(ip).build() : getStatus(args[0]).build()).queue();
+                    case "help" -> {
+                        EmbedBuilder embed = new EmbedBuilder()
+                            .setColor(DEFAULT_COLOR)
+                            .setFooter("mcStatus's Commands","https://i.imgur.com/fFuQdNp.png")
+                            .addField(Main.CONFIG.getCommandPrefix() + "setip <ip>","Set the minecraft server IP address that the status command will use.",false)
+                            .addField(Main.CONFIG.getCommandPrefix() + "status","Get the status of a minecraft server, allowing you to see the number of players online, and a list of their names.",false)
+                            .addField(Main.CONFIG.getCommandPrefix() + "serverinfo","Get the information of a minecraft server, allowing you to see the MOTD, Version, and the Port.",false);
+                        chat.sendMessage(embed.build()).queue();
                     }
-                    case "status" -> {
-                        if (args.length == 0) {
-                            getStatus(serverIp, chat);
-                        } else if (args.length == 1) {
-                            getStatus(args[0], chat);
-                        }
-                    }
+                    //maintenance commands
                     case "shutdown" -> {
-                        if (event.getAuthor().getId().equals(Bot.CONFIG.getOwnerID())) {
+                        if (e.getAuthor().getId().equals(Main.CONFIG.getOwnerID())) {
                             EmbedBuilder embed = new EmbedBuilder()
-                                    .setColor(new Color(0,180,181))
-                                    .setTitle("Shutting down SimpleServerStats...");
+                                    .setColor(DEFAULT_COLOR)
+                                    .setTitle("Shutting down...");
                             chat.sendMessage(embed.build()).queue();
                             System.out.println("[JDA] Remotely shut down from Discord!");
                             System.exit(0);
                         }
-
                     }
                 }
             }
         }
     }
 
-    public StatusResponse getResponse(String ip) throws UnirestException {
+    public Response getResponse(String ip) throws UnirestException {
 
         HttpResponse<JsonNode> response = Unirest.get("https://api.mcsrvstat.us/2/" + ip).header("accept", "application/json").asJson();
         Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
-        return gson.fromJson((response.getBody()).toString(), StatusResponse.class);
+        return gson.fromJson((response.getBody()).toString(), Response.class);
 
     }
 
-    public void getStatus(String ip, TextChannel chat) {
+    public EmbedBuilder getStatus(String ip) {
 
-        if (!ip.equals("")) {
+        EmbedBuilder embed = new EmbedBuilder()
+                .setColor(DEFAULT_COLOR)
+                .setFooter(ip,"https://api.mcsrvstat.us/icon/" + ip);
+
+        if (!ip.isEmpty()) {
             try {
-                StatusResponse response = getResponse(ip);
-                EmbedBuilder embed = new EmbedBuilder()
-                        .setColor(new Color(0,180,181))
-                        .setAuthor(ip, "https://api.mcsrvstat.us/icon/" + ip, "https://api.mcsrvstat.us/icon/" + ip);
+                Response response = getResponse(ip);
                 if (response.getOnline().equals("true")) {
-                    embed.addField("\ud83d\udd79  # of Players Online:", "```" + response.getPlayers().getOnline() + "```", true);
                     int numPlayers = Integer.parseInt(response.getPlayers().getOnline());
+                    embed.addField("\ud83d\udd79  # of Players Online:", "```" + numPlayers + "```", true);
                     if (numPlayers > 15) {
-                        embed.addField("\ud83d\udcac  Players:", "```Too many players to display```", false);
+                        embed.addField("\ud83d\udcac   Players:", "```Too many players to display```", false);
                     } else if (numPlayers > 0) {
                         String players = Arrays.asList(response.getPlayers().getList()).toString();
-                        embed.addField("\ud83d\udcac  Players:", "```" + players.substring(1, Arrays.asList(response.getPlayers().getList()).toString().length() - 1) + "```", false);
+                        embed.addField("\ud83d\udcac    Players:", "```" + players.substring(1, Arrays.asList(response.getPlayers().getList()).toString().length() - 1) + "```", false);
                     } else {
-                        embed.addField("\ud83d\udcac  Players:", "```No players online```", false);
+                        embed.addField("\ud83d\udcac   Players:", "```No players online```", false);
                     }
                 } else {
                     embed.setDescription("This server is offline. Are you sure the ip adress is: " + ip);
                 }
-                chat.sendMessage(embed.build()).queue();
             } catch (Exception e) {
-                EmbedBuilder errorembed = new EmbedBuilder()
-                    .setColor(new Color(0,180,181))
-                    .setTitle("There was an error getting the server info");
-                chat.sendMessage(errorembed.build()).queue();
+                embed.setTitle("There was an error getting the server info!");
             }
         } else {
-            EmbedBuilder embed = new EmbedBuilder()
-                .setTitle("You haven't set the server IP address. Use  `!setip [ip]`  to set it.")
-                .setColor(new Color(0,180,181));
-            chat.sendMessage(embed.build()).queue();
+            embed.setTitle("You haven't set the server IP address! Use `" + Main.CONFIG.getCommandPrefix() + "setip {ip}` to set it!");
         }
+        return embed;
     }
 
-    public void getInfo(String ip, TextChannel chat) {
+    public EmbedBuilder getInfo(String ip) {
+
+        EmbedBuilder embed = new EmbedBuilder()
+                .setColor(DEFAULT_COLOR)
+                .setFooter(ip, "https://api.mcsrvstat.us/icon/" + ip);
 
         try {
-            StatusResponse response = this.getResponse(ip);
-            boolean online = response.getOnline().equals("true");
-            EmbedBuilder embed = new EmbedBuilder();
-            embed.setColor(new Color(0,180,181));
-            embed.setAuthor(ip, "https://api.mcsrvstat.us/icon/" + ip, "https://api.mcsrvstat.us/icon/" + ip);
-            if (!online) {
-                embed.setDescription("This server is offline. Are you sure the ip adress is: " + ip);
-            } else {
-                embed.addField("ℹ️  IP Address:", "```" + response.getIp() + "```", false);
+            Response response = getResponse(ip);
+            if(response.getOnline().equals("true")) {
                 ArrayList<String> motd = new ArrayList<>(Arrays.asList(response.getMotd().get("clean")));
                 for (int line = 0; line < motd.size(); line++) {
                     motd.set(line,motd.get(line).trim());
                 }
-                embed.addField("⌨️  MOTD:", "```" + motd + "```", false);
-                embed.addField("\ud83d\udcbf  Version:", response.getVersion().equals("1.8.x, 1.9.x, 1.10.x, 1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.15.x, 1.16.x") ? "```1.8.x - 1.16.x```" : "```" + response.getVersion() + "```", false);
-                embed.addField("\ud83d\udd0c  Port:", "```" + response.getPort() + "```", false);
+                embed.addField("ℹ  IP Address:", "```" + response.getIp() + "```", false)
+                    .addField("⌨  MOTD:", "```" + motd + "```", false)
+                    .addField("\ud83d\udcbf  Version:", "```" + (response.getVersion().equals("1.8.x, 1.9.x, 1.10.x, 1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.15.x, 1.16.x") ? "1.8.x - 1.16.x" : response.getVersion()) + "```", false)
+                    .addField("\ud83d\udd0c  Port:", "```" + response.getPort() + "```", false);
+            } else {
+                embed.setDescription("This server is offline. Are you sure the ip adress is: " + ip);
             }
-            chat.sendMessage(embed.build()).queue();
         } catch (Exception e) {
-            EmbedBuilder embed = new EmbedBuilder()
-                .setColor(new Color(0,180,181))
-                .setTitle("There was an error getting the server info");
-            chat.sendMessage(embed.build()).queue();
+            embed.setTitle("There was an error getting the server info");
         }
+        return embed;
     }
 }

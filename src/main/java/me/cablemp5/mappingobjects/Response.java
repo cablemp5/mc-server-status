@@ -1,15 +1,15 @@
-package me.cablemp5.jsonobjects;
+package me.cablemp5.mappingobjects;
 
 import java.util.HashMap;
 
-public class StatusResponse {
+public class Response {
 
     private HashMap<String,String[]> motd;
     private String protocol;
     private String hostname;
     private HashMap<String,String> debug;
     private String port;
-    private Player players;
+    private ResponsePlayer players;
     private String ip;
     private String icon;
     private String online;
@@ -35,7 +35,7 @@ public class StatusResponse {
         return port;
     }
 
-    public Player getPlayers() {
+    public ResponsePlayer getPlayers() {
         return players;
     }
 

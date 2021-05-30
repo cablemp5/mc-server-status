@@ -1,8 +1,8 @@
-package me.cablemp5.jsonobjects;
+package me.cablemp5.mappingobjects;
 
 import java.util.HashMap;
 
-public class Player {
+public class ResponsePlayer {
 
     private String max;
     private String online;
