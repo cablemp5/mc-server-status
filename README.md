@@ -90,9 +90,13 @@ mcs!info
 This software uses the following API's and libraries:
 
 - [**MongoDB**](https://www.mongodb.com/)
+  - NoSQL Database Program 
 - [**JDA**](https://github.com/DV8FromTheWorld/JDA)
+  - Java Discord API 
 - [**Unirest**](https://kong.github.io/unirest-java/#requests)
+  - Lightweight HTTP Client
 - [**Gson**](https://github.com/google/gson)
+  - JSON Deserialization Library 
 
 # Bugs and Support
 
