@@ -71,14 +71,17 @@ mcServerStatus is a lightweight Discord bot written in Java that allows you to v
 # Usage
 
 ```js
+// View a list of the commands
+mcs!help
+
 //Set the ip address
-!setip <ip>
+mcs!setip <ip>
 
 // Gets the server's status
-!status
+mcs!status
 
 // Gets the server's info
-!info
+mcs!info
 ```
 
 
