@@ -9,6 +9,7 @@ public class MongoConnection {
     private String uri;
     private String databaseName;
     private String collectionName;
+    
 
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
